@@ -3,6 +3,8 @@
 import path from 'path';
 import semver from 'semver';
 
+const getVersionFromPackage = (bPath) => require(path.join(bPath, 'package.json')).version;
+
 /**
  * Checks Bootstrap version
  *
@@ -10,8 +12,8 @@ import semver from 'semver';
  * @param   {string} bootstrapPath
  * @returns {Object}
  */
-export default function(bootstrapVersion, bootstrapPath) {
-  const npmVersion = require(path.join(bootstrapPath, 'package.json')).version;
+export default function(bootstrapVersion, bootstrapPath, extractVersion = getVersionFromPackage) {
+  const npmVersion = extractVersion(bootstrapPath);
 
   return {
     version: npmVersion,

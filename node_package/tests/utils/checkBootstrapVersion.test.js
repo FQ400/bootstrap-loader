@@ -18,3 +18,15 @@ test('checkBootstrapVersion keeps the contract', (assert) => {
   assert.end();
 });
 
+test('calls the third argument with the bootstrapPath argument', (assert) => {
+  const bPath = '/an/absolute/path';
+  const stubFn = (arg) => {
+    assert.equals(arg, bPath);
+
+    return '2.1.0';
+  };
+
+  checkBootstrapVersion(2, bPath, stubFn);
+
+  assert.end();
+});
